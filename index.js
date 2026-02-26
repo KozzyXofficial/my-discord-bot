@@ -76,3 +76,6 @@ process.on("unhandledRejection", (err) => {
 process.on("uncaughtException", (err) => {
     console.error("Uncaught Exception:", err);
 });
+
+
+//update github everytime theres a new change in my bot codes
