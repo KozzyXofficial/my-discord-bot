@@ -1,0 +1,38 @@
+name: Deploy to Google Cloud VM
+
+on:
+  push:
+    branches:
+      - main   # change to "master" if that's your default branch
+
+jobs:
+  deploy:
+    name: SSH & Restart Bot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:     ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key:      ${{ secrets.VM_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "==> Navigating to bot directory..."
+            cd ${{ secrets.VM_PATH }}
+
+            echo "==> Pulling latest code..."
+            git pull origin main
+
+            echo "==> Installing/updating dependencies..."
+            npm install --omit=dev
+
+            echo "==> Redeploying slash commands to Discord..."
+            node src/deploy-guild.js || true
+
+            echo "==> Restarting bot via pm2..."
+            pm2 restart KozzyX --update-env
+
+            echo "==> Done! Bot is back online."

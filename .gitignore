@@ -1,0 +1,28 @@
+# Secrets — never commit these
+.env
+*.env.*
+
+# Runtime data
+database.sqlite
+database.sqlite-shm
+database.sqlite-wal
+*.json.tmp
+
+# Logs
+*.log
+crash_log.txt
+debug_output.txt
+
+# Data files that are managed at runtime
+afk.json
+autoresponders.json
+boosterroles.json
+cosmetics.json
+settings.json
+warnings.json
+
+# Node
+node_modules/
+
+# macOS
+.DS_Store

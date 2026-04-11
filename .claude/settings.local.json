@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check src/slashCommands/general/server_setup.js)"
+    ]
+  }
+}
