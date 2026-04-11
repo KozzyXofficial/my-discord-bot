@@ -203,12 +203,20 @@ export default {
     },
 
     async execute(interaction) {
-        const guild = interaction.guild;
-        if (!guild) {
+        if (!interaction.guildId) {
             return safeRespond(interaction, asEmbedPayload({
                 guildId: null, type: "error",
                 title: "❌ Server Only",
                 description: "This command can only be used in a server.",
+                ephemeral: true,
+            }));
+        }
+        const guild = interaction.guild || await interaction.client.guilds.fetch(interaction.guildId).catch(() => null);
+        if (!guild) {
+            return safeRespond(interaction, asEmbedPayload({
+                guildId: null, type: "error",
+                title: "❌ Cannot Access Server",
+                description: "I couldn't load this server. Make sure I have been properly invited.",
                 ephemeral: true,
             }));
         }
