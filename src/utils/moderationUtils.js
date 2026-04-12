@@ -14,18 +14,20 @@ async function reply(ctx, opts) {
 }
 
 // ---------------- MOD ACTION DMs ----------------
-export async function trySendModDM({ user, guild, type = "mod", title, description, moderatorTag, reason, durationText }) {
+export async function trySendModDM({ user, guild, type = "mod", title, description, moderatorTag, reason, durationText, expiresAt }) {
     try {
         if (!user || !guild) return false;
 
         const fields = [
-            { name: "Server", value: `${guild.name}`, inline: true },
-            { name: "Moderator", value: moderatorTag ? moderatorTag : "Unknown", inline: true },
+            { name: "🏠 Server", value: guild.name, inline: true },
+            { name: "👮 Moderator", value: moderatorTag || "Unknown", inline: true },
+            { name: "🕐 When", value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: false },
         ];
 
-        if (reason) fields.push({ name: "Reason", value: String(reason).slice(0, 1024), inline: false });
-        if (durationText) fields.push({ name: "Duration", value: durationText, inline: true });
-        fields.push({ name: "Your ID", value: `${user.id}`, inline: true });
+        if (reason) fields.push({ name: "📋 Reason", value: String(reason).slice(0, 1024), inline: false });
+        if (durationText) fields.push({ name: "⏱️ Duration", value: durationText, inline: true });
+        if (expiresAt) fields.push({ name: "🔓 Expires", value: `<t:${Math.floor(expiresAt / 1000)}:R>`, inline: true });
+        fields.push({ name: "🪪 Your ID", value: user.id, inline: true });
 
         const embed = buildCoolEmbed({
             guildId: guild.id,
@@ -33,9 +35,9 @@ export async function trySendModDM({ user, guild, type = "mod", title, descripti
             title,
             description,
             fields,
-            showAuthor: true,
+            thumbnail: guild.iconURL({ dynamic: true }) || null,
             showFooter: true,
-            footerText: `${guild.name}`,
+            footerText: guild.name,
         });
 
         await user.send({ embeds: [embed] });
@@ -53,7 +55,7 @@ export async function doKick(ctx, target, reason) {
             guild: ctx.guild,
             type: "mod",
             title: "👢 You were kicked",
-            description: "You have been kicked from the server.",
+            description: "You have been removed from the server. You can rejoin with an invite link.",
             moderatorTag: author.tag,
             reason,
         });
@@ -112,19 +114,21 @@ export async function doBan(ctx, target, reason) {
     }
 }
 
-export async function doTimeout(ctx, target, ms) {
+export async function doTimeout(ctx, target, ms, reason) {
     const author = getAuthor(ctx);
     try {
         const minutes = Math.round(ms / 60000);
+        const expiresAt = Date.now() + ms;
         await trySendModDM({
             user: target.user,
             guild: ctx.guild,
             type: "mod",
             title: "⏱️ You were timed out",
-            description: "You have been timed out in the server.",
+            description: "You have been timed out and cannot send messages or join voice channels until it expires.",
             moderatorTag: author.tag,
-            reason: `Timed out for ${minutes} minute(s).`,
-            durationText: `${minutes} minute(s)`,
+            reason: reason || "No reason provided.",
+            durationText: minutes >= 60 ? `${Math.round(minutes / 60)}h ${minutes % 60}m`.replace(" 0m", "") : `${minutes}m`,
+            expiresAt,
         });
         await target.timeout(ms, `Timed out by ${author.tag}`);
 

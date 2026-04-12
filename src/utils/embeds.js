@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import { getGuildSettings } from "./database.js";
 
 // ---------------- BASIC EMBED BUILDER ----------------
-export function buildCoolEmbed({ guildId, type = "info", client, title = null, description = null, footerUser = null, fields = null, showAuthor = false, showFooter = false, footerText = null }) {
+export function buildCoolEmbed({ guildId, type = "info", client, title = null, description = null, footerUser = null, fields = null, showAuthor = false, showFooter = false, footerText = null, thumbnail = null }) {
     const settings = guildId ? getGuildSettings(guildId) : null;
     const color = settings?.embedColors?.[type] ?? 0x5865f2;
 
@@ -19,6 +19,7 @@ export function buildCoolEmbed({ guildId, type = "info", client, title = null, d
 
     if (title) embed.setTitle(title);
     if (description) embed.setDescription(description);
+    if (thumbnail) embed.setThumbnail(thumbnail);
     if (Array.isArray(fields) && fields.length) embed.addFields(fields);
 
     if (footerUser) {
