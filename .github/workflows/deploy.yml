@@ -33,6 +33,7 @@ jobs:
             node src/deploy-guild.js || true
 
             echo "==> Restarting bot via pm2..."
-            pm2 restart KozzyX --update-env
+            pm2 restart KozzyX --update-env || true
+            pm2 save
 
             echo "==> Done! Bot is back online."
