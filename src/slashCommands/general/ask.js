@@ -38,7 +38,7 @@ async function saveHistory(userId, guildId, messages) {
 export default {
     data: {
         name: "ask",
-        description: "Ask Claude AI a question",
+        description: "Ask the bot a question",
         integration_types: [0, 1],
         contexts: [0, 1, 2],
         options: [
@@ -89,7 +89,7 @@ export default {
                 guildId: i.guild?.id,
                 type: "error",
                 title: "❌ AI Error",
-                description: "Failed to get a response from Claude. Please try again later.",
+                description: "Failed to get a response. Please try again later.",
                 ephemeral: true,
             }));
         }
@@ -107,12 +107,12 @@ export default {
         cooldowns.set(i.user.id, now + (COOLDOWN_SECONDS * 1000));
 
         const trimmed = answer.length > 4000 ? answer.slice(0, 3997) + "..." : answer;
-        const footer = useHistory ? "💬 Conversation memory is ON — Claude remembers this chat." : null;
+        const footer = useHistory ? "💬 Conversation memory is ON — the bot remembers this chat." : null;
 
         return safeRespond(i, asEmbedPayload({
             guildId: i.guild?.id,
             type: "info",
-            title: "🤖 Claude Answer",
+            title: "🤖 Answer",
             description: `**Q:** ${prompt}\n\n${trimmed}`,
             footerUser: footer ? null : i.user,
             client: i.client,

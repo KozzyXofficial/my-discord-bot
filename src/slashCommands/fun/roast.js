@@ -44,7 +44,7 @@ export default {
             roast = await askGrok(`Write a savage roast for a Discord user named "${target.username}".`);
         }
 
-        // Fall back to static lines if Grok fails or key is missing
+        // Fall back to static lines if AI fails or key is missing
         if (!roast) {
             roast = roastLines[Math.floor(Math.random() * roastLines.length)];
         }

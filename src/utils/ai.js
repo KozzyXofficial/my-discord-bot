@@ -21,7 +21,7 @@ async function callClaude(messages, { model = "claude-haiku-4-5-20251001", maxTo
         const response = await anthropic.messages.create(params);
         return response.content[0].text;
     } catch (error) {
-        console.error("Claude API Error:", error.status, error.message);
+        console.error("AI API Error:", error.status, error.message);
         if (error instanceof Anthropic.RateLimitError) return "QUOTA_EXCEEDED";
         if (error instanceof Anthropic.InternalServerError && error.status === 529) return "QUOTA_EXCEEDED";
         return "ERROR";

@@ -4,8 +4,8 @@ import { asEmbedPayload } from "../../utils/embeds.js";
 import { getGuildSettings, saveSettings } from "../../utils/database.js";
 
 const PLUGIN_META = {
-    conversation_memory: { label: "Conversation Memory",  desc: "Claude remembers your chat history in /ask across sessions." },
-    ai_moderation:       { label: "AI Moderation",        desc: "Claude auto-flags and deletes toxic/harmful messages." },
+    conversation_memory: { label: "Conversation Memory",  desc: "Remembers your chat history in /ask across sessions." },
+    ai_moderation:       { label: "AI Moderation",        desc: "Auto-flags and deletes toxic/harmful messages." },
     dynamic_vc:          { label: "Dynamic Voice Channels", desc: "Auto-create personal VCs when users join a trigger channel." },
     invite_tracking:     { label: "Invite Tracking",      desc: "Track who invited each member. Shows on /userinfo." },
     anti_raid:           { label: "Anti-Raid",            desc: "Detect and lock down the server during join-rate spikes." },

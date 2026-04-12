@@ -5,7 +5,7 @@ import { getDB } from "../../utils/db.js";
 export default {
     data: {
         name: "clear_memory",
-        description: "Clear Claude's conversation history for you in this server.",
+        description: "Clear your conversation history for you in this server.",
         integration_types: [0, 1],
         contexts: [0, 1, 2],
     },
@@ -23,7 +23,7 @@ export default {
             type: cleared ? "success" : "info",
             title: cleared ? "🧹 Memory Cleared" : "💭 Nothing to Clear",
             description: cleared
-                ? "Claude's conversation history for you in this server has been wiped. Next `/ask` starts fresh."
+                ? "Your conversation history in this server has been wiped. Next `/ask` starts fresh."
                 : "You have no stored conversation history here.",
             ephemeral: true,
         }));
