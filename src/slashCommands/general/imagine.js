@@ -14,14 +14,14 @@ const MODELS = [
 export default {
     data: {
         name: "imagine",
-        description: "Generate an image using Pollinations.ai",
+        description: "Generate an image from a text prompt",
         integration_types: [0, 1],
         contexts: [0, 1, 2],
         options: [
             { name: "prompt", description: "Image description", type: 3, required: true },
             {
                 name: "model",
-                description: "AI model to use",
+                description: "Model to use",
                 type: 3,
                 required: false,
                 choices: MODELS,
@@ -29,7 +29,7 @@ export default {
             { name: "width", description: "Image width (default 1024)", type: 4, required: false, min_value: 256, max_value: 2048 },
             { name: "height", description: "Image height (default 1024)", type: 4, required: false, min_value: 256, max_value: 2048 },
             { name: "seed", description: "Seed for reproducibility", type: 4, required: false },
-            { name: "enhance", description: "Enhance prompt with AI", type: 5, required: false },
+            { name: "enhance", description: "Enhance the prompt automatically", type: 5, required: false },
             { name: "negative", description: "What to avoid in the image", type: 3, required: false },
         ],
     },

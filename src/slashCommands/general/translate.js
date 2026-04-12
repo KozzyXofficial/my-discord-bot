@@ -9,7 +9,7 @@ const COOLDOWN_SECONDS = 30;
 export default {
     data: {
         name: "translate",
-        description: "Translate text using AI",
+        description: "Translate text to another language",
         integration_types: [0, 1],
         contexts: [0, 1, 2],
         options: [
@@ -45,7 +45,7 @@ export default {
             return safeRespond(i, asEmbedPayload({
                 guildId: i.guild?.id,
                 type: "error",
-                title: "❌ AI Error",
+                title: "❌ Error",
                 description: "Translation failed. Please try again later.",
                 ephemeral: true,
             }));
@@ -56,7 +56,7 @@ export default {
                 guildId: i.guild?.id,
                 type: "error",
                 title: "⚠️ Quota Exceeded",
-                description: "The bot's AI quota has been reached. Please try again tomorrow or wait a few minutes.",
+                description: "The bot's quota has been reached. Please try again later.",
                 ephemeral: true,
             }));
         }

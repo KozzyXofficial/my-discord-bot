@@ -16,8 +16,10 @@ export default {
         await loadCosmetics();
         await seedInviteCache(client);
 
-        // Optional: Deploy commands to all guilds on startup to ensure consistency
-        await client.deploySlashCommands();
+        // Guild deploy — instant updates, no 1-hour global propagation delay
+        if (process.env.GUILD_ID) {
+            await client.deploySlashCommands(process.env.GUILD_ID);
+        }
 
         console.log("✅ All data loaded. Bot is fully online.");
     }
