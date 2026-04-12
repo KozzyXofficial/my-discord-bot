@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node --check src/slashCommands/general/server_setup.js)"
+      "Bash(node --check src/slashCommands/general/server_setup.js)",
+      "Read(//Users/ckazros/Desktop/ai-bot/src/**)",
+      "Bash(rm -f slashCommands/general/afk.js slashCommands/general/appeal.js slashCommands/general/avatar.js slashCommands/general/banner.js slashCommands/general/decide.js slashCommands/general/define.js slashCommands/general/features.js slashCommands/general/help.js slashCommands/general/invites.js slashCommands/general/modhelp.js slashCommands/general/nuke.js slashCommands/general/plugins.js slashCommands/general/redo_server_setup.js slashCommands/general/remind.js slashCommands/general/server_setup.js slashCommands/general/serverinfo.js slashCommands/general/todo.js slashCommands/general/userinfo.js slashCommands/general/vc.js slashCommands/general/wipe_server.js)",
+      "Bash(rm -f slashCommands/fun/hug.js slashCommands/fun/topic.js)",
+      "Bash(rm -rf prefixCommands)",
+      "Bash(mkdir -p prefixCommands)",
+      "Bash(node --input-type=module --experimental-vm-modules)",
+      "Bash(node -e \"import\\('./src/deploy-guild.js'\\).catch\\(e => console.error\\(e.message\\)\\)\")"
     ]
   }
 }

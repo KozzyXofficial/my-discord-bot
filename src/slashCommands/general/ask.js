@@ -88,7 +88,7 @@ export default {
             return safeRespond(i, asEmbedPayload({
                 guildId: i.guild?.id,
                 type: "error",
-                title: "❌ AI Error",
+                title: "❌ Error",
                 description: "Failed to get a response. Please try again later.",
                 ephemeral: true,
             }));
@@ -99,7 +99,7 @@ export default {
                 guildId: i.guild?.id,
                 type: "error",
                 title: "⚠️ Quota Exceeded",
-                description: "The bot's AI quota has been reached. Please try again later.",
+                description: "The bot's quota has been reached. Please try again later.",
                 ephemeral: true,
             }));
         }

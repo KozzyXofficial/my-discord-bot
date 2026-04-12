@@ -47,7 +47,7 @@ export default {
         if (!rulesText || rulesText === "ERROR" || rulesText === "QUOTA_EXCEEDED") {
             return safeRespond(interaction, asEmbedPayload({
                 guildId: guild.id, type: "error",
-                title: "❌ AI Error",
+                title: "❌ Error",
                 description: "Failed to generate rules. Please try again.",
             }));
         }

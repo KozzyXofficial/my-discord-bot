@@ -65,12 +65,12 @@ export default {
                                     guildId: message.guild.id,
                                     type: "warning",
                                     title: "🤖 Message Removed",
-                                    description: `<@${message.author.id}> your message was removed by AI moderation.\n**Reason:** ${verdict.reason || "Violated community guidelines."}`,
+                                    description: `<@${message.author.id}> your message was removed by auto-moderation.\n**Reason:** ${verdict.reason || "Violated community guidelines."}`,
                                 })],
                             }).catch(() => null);
                             // Log to case channel
                             const { postCase, caseEmbed } = await import("../utils/embeds.js");
-                            await postCase(message.guild, caseEmbed(message.guild.id, "🤖 AI Moderation — Message Removed", [
+                            await postCase(message.guild, caseEmbed(message.guild.id, "🤖 Auto-Moderation — Message Removed", [
                                 `**User:** ${message.author.tag} (<@${message.author.id}>)`,
                                 `**Severity:** ${verdict.severity}`,
                                 `**Reason:** ${verdict.reason}`,

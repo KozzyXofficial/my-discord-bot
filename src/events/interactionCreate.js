@@ -46,6 +46,53 @@ export default {
             if (id.startsWith("appeal_")) {
                 return handleAppealButton(interaction);
             }
+
+            // Help pagination: help_prev:<category>:<page> | help_next:<category>:<page>
+            if (id.startsWith("help_prev:") || id.startsWith("help_next:")) {
+                const parts = id.split(":");
+                const dir = parts[0]; // help_prev or help_next
+                const category = parts[1];
+                const page = parseInt(parts[2]);
+                const newPage = dir === "help_prev" ? page - 1 : page + 1;
+                const { helpPages } = await import("../slashCommands/general/help.js");
+                const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = await import("discord.js");
+                const pages = helpPages[category];
+                const row = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder().setCustomId(`help_prev:${category}:${newPage}`).setLabel("⬅ Previous").setStyle(ButtonStyle.Secondary).setDisabled(newPage === 0),
+                    new ButtonBuilder().setCustomId(`help_next:${category}:${newPage}`).setLabel("Next ➡").setStyle(ButtonStyle.Primary).setDisabled(newPage === pages.length - 1)
+                );
+                return interaction.update({ embeds: [pages[newPage]], components: [row] });
+            }
+
+            // Modhelp pagination: modhelp_prev:<page> | modhelp_next:<page>
+            if (id.startsWith("modhelp_prev:") || id.startsWith("modhelp_next:")) {
+                const parts = id.split(":");
+                const dir = parts[0];
+                const page = parseInt(parts[1]);
+                const newPage = dir === "modhelp_prev" ? page - 1 : page + 1;
+                const { modHelpPages } = await import("../slashCommands/general/modhelp.js");
+                const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = await import("discord.js");
+                const row = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder().setCustomId(`modhelp_prev:${newPage}`).setLabel("⬅ Previous").setStyle(ButtonStyle.Secondary).setDisabled(newPage === 0),
+                    new ButtonBuilder().setCustomId(`modhelp_next:${newPage}`).setLabel("Next ➡").setStyle(ButtonStyle.Primary).setDisabled(newPage === modHelpPages.length - 1)
+                );
+                return interaction.update({ embeds: [modHelpPages[newPage]], components: [row] });
+            }
+
+            // Features pagination: features_prev:<page> | features_next:<page>
+            if (id.startsWith("features_prev:") || id.startsWith("features_next:")) {
+                const parts = id.split(":");
+                const dir = parts[0];
+                const page = parseInt(parts[1]);
+                const newPage = dir === "features_prev" ? page - 1 : page + 1;
+                const { featureHelpPages } = await import("../slashCommands/general/features.js");
+                const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = await import("discord.js");
+                const row = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder().setCustomId(`features_prev:${newPage}`).setLabel("⬅ Previous").setStyle(ButtonStyle.Secondary).setDisabled(newPage === 0),
+                    new ButtonBuilder().setCustomId(`features_next:${newPage}`).setLabel("Next ➡").setStyle(ButtonStyle.Primary).setDisabled(newPage === featureHelpPages.length - 1)
+                );
+                return interaction.update({ embeds: [featureHelpPages[newPage]], components: [row] });
+            }
         }
     }
 };
