@@ -78,6 +78,7 @@ function defaultEmbedColors() {
 
 function defaultPlugins() {
     return {
+        // opt-in features (off by default — require setup)
         conversation_memory: false,
         ai_moderation:       false,
         dynamic_vc:          false,
@@ -85,6 +86,13 @@ function defaultPlugins() {
         anti_raid:           false,
         appeals:             false,
         audit_log:           false,
+        // core features (on by default — disable to turn off)
+        afk:                 true,
+        autoresponders:      true,
+        booster_roles:       true,
+        tickets:             true,
+        warnings:            true,
+        nicklock:            true,
     };
 }
 

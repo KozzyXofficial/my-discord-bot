@@ -1,4 +1,18 @@
 {
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/ckazros/Library/Mobile Documents/com~apple~CloudDocs/my-discord-bot\" && git add -A && git diff --cached --quiet || git commit -m \"chore: auto-save changes\" && git push 2>/dev/null || true",
+            "statusMessage": "Pushing to GitHub..."
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(node --check src/slashCommands/general/server_setup.js)",
