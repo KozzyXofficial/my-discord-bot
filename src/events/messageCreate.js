@@ -278,8 +278,12 @@ export default {
                 return replyEmbed(message, { type: "settings", title: "🎨 Embed Color Updated", description: `Set **${type}** embed color to **#${String(hexPart).replace("#", "").toUpperCase()}**.` });
             }
 
-            // Command loader
-            const command = client.prefixCommands.get(commandName) || client.prefixCommands.get(client.aliases.get(commandName));
+            // Command loader — resolves in order: built-in name → built-in alias → per-guild custom alias
+            let command = client.prefixCommands.get(commandName) || client.prefixCommands.get(client.aliases.get(commandName));
+            if (!command) {
+                const canonical = settings.commandAliases?.[commandName];
+                if (canonical) command = client.prefixCommands.get(canonical);
+            }
             if (command) {
                 try {
                     await command.execute(message, args, client);

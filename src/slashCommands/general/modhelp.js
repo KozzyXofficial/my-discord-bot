@@ -5,7 +5,7 @@ export const modHelpPages = [];
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (1/6)")
+        .setTitle("🔧 Moderator Help (1/7)")
         .setDescription(
             "🔧 Moderation\n\n" +
             "`,kick @user [reason]` – Kick a user.\n" +
@@ -21,7 +21,7 @@ modHelpPages.push(
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (2/6)")
+        .setTitle("🔧 Moderator Help (2/7)")
         .setDescription(
             "🎫 Tickets\n\n" +
             "`,ticket_channel #channel` – Set ticket panel channel.\n" +
@@ -35,7 +35,7 @@ modHelpPages.push(
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (3/6)")
+        .setTitle("🔧 Moderator Help (3/7)")
         .setDescription(
             "🤖 Autoresponders\n\n" +
             "`,autoresponder add <trigger> <response>`\n" +
@@ -51,7 +51,7 @@ modHelpPages.push(
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (4/6)")
+        .setTitle("🔧 Moderator Help (4/7)")
         .setDescription(
             "⚠️ Warnings / Thresholds\n\n" +
             "`,warn @user [reason]` – Warn a user.\n" +
@@ -67,7 +67,7 @@ modHelpPages.push(
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (5/6)")
+        .setTitle("🔧 Moderator Help (5/7)")
         .setDescription(
             "🧱 Channel Tools\n\n" +
             "`,lock [#channel] [reason]` – Lock a channel.\n" +
@@ -88,7 +88,7 @@ modHelpPages.push(
 
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (6/6)")
+        .setTitle("🔧 Moderator Help (6/7)")
         .setDescription(
             "🛡️ AutoMod Rules\n\n" +
             "`,automod list` – View all rules, strike limit, and sensitivity.\n" +
@@ -102,6 +102,22 @@ modHelpPages.push(
             "`,automod_whitelist list` – View all whitelisted words.\n\n" +
             "⚙️ Bot Settings\n\n" +
             "`,prefix_delete_respond_cooldown <seconds|off>` – How long before bot responses auto-delete (default: 3s).\n"
+        )
+        .setColor(0xed4245)
+);
+
+modHelpPages.push(
+    new EmbedBuilder()
+        .setTitle("🔧 Moderator Help (7/7)")
+        .setDescription(
+            "🔤 Command Aliases\n\n" +
+            "Rename **any** prefix command in this server. Default names keep working.\n\n" +
+            "`,alias add <command> <alias>` – Give a command a custom name.\n" +
+            "Example: `,alias add ban yeet` lets you run `,yeet @user`.\n\n" +
+            "`,alias remove <alias>` – Remove a custom alias.\n" +
+            "`,alias reset <command>` – Clear all aliases for one command.\n" +
+            "`,alias reset all` – Clear every custom alias.\n" +
+            "`,alias list` – Show all custom aliases in this server.\n"
         )
         .setColor(0xed4245)
 );

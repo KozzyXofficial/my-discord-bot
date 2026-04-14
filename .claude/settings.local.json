@@ -8,7 +8,11 @@
       "Bash(rm -rf prefixCommands)",
       "Bash(mkdir -p prefixCommands)",
       "Bash(node --input-type=module --experimental-vm-modules)",
-      "Bash(node -e \"import\\('./src/deploy-guild.js'\\).catch\\(e => console.error\\(e.message\\)\\)\")"
+      "Bash(node -e \"import\\('./src/deploy-guild.js'\\).catch\\(e => console.error\\(e.message\\)\\)\")",
+      "Bash(node --check src/prefixCommands/config/alias.js)",
+      "Bash(node --check src/events/messageCreate.js)",
+      "Bash(node --check src/utils/database.js)",
+      "Bash(node --check src/slashCommands/general/modhelp.js)"
     ]
   }
 }

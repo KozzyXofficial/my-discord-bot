@@ -122,9 +122,12 @@ export function getGuildSettings(guildId) {
                 spam:          true,
                 caps:          true,
             },
+            commandAliases: {},
         };
         serverSettings.set(guildId, s);
     }
+
+    if (!s.commandAliases || typeof s.commandAliases !== "object") s.commandAliases = {};
 
     if (!s.ticket) s.ticket = defaultTicketConfig();
     if (typeof s.autoresponderFilterOn !== "boolean") s.autoresponderFilterOn = true;
