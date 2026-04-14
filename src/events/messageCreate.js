@@ -140,30 +140,36 @@ export default {
             // ── AFK removal ──────────────────────────────────────────────────
             const afkEntry = afkMap.get(message.author.id);
             if (afkEntry) {
-                await clearAfk(message.author.id);
-                await replyEmbed(message, {
-                    type: "afk",
-                    title: "👋 Welcome Back",
-                    description: "Your AFK status has been removed.",
-                }).catch(() => { });
+                const afkEnabled = !message.guild || getGuildSettings(message.guild.id).plugins?.afk !== false;
+                if (afkEnabled) {
+                    await clearAfk(message.author.id);
+                    await replyEmbed(message, {
+                        type: "afk",
+                        title: "👋 Welcome Back",
+                        description: "Your AFK status has been removed.",
+                    }).catch(() => { });
+                }
             }
 
             // ── AFK mention notice ───────────────────────────────────────────
             if (message.mentions.users.size > 0) {
-                const lines = [];
-                for (const [, user] of message.mentions.users) {
-                    const entry = afkMap.get(user.id);
-                    if (entry) {
-                        const mins = Math.floor((Date.now() - entry.since) / 60000);
-                        lines.push(`• **${user.username}** is AFK: **${entry.reason}** (${mins} min)`);
+                const afkEnabled = !message.guild || getGuildSettings(message.guild.id).plugins?.afk !== false;
+                if (afkEnabled) {
+                    const lines = [];
+                    for (const [, user] of message.mentions.users) {
+                        const entry = afkMap.get(user.id);
+                        if (entry) {
+                            const mins = Math.floor((Date.now() - entry.since) / 60000);
+                            lines.push(`• **${user.username}** is AFK: **${entry.reason}** (${mins} min)`);
+                        }
                     }
-                }
-                if (lines.length > 0) {
-                    await replyEmbed(message, {
-                        type: "afk",
-                        title: "💤 AFK Notice",
-                        description: lines.join("\n"),
-                    }).catch(() => { });
+                    if (lines.length > 0) {
+                        await replyEmbed(message, {
+                            type: "afk",
+                            title: "💤 AFK Notice",
+                            description: lines.join("\n"),
+                        }).catch(() => { });
+                    }
                 }
             }
 
