@@ -123,11 +123,15 @@ export function getGuildSettings(guildId) {
                 caps:          true,
             },
             commandAliases: {},
+            disabledCommands: { prefix: [], slash: [] },
         };
         serverSettings.set(guildId, s);
     }
 
     if (!s.commandAliases || typeof s.commandAliases !== "object") s.commandAliases = {};
+    if (!s.disabledCommands || typeof s.disabledCommands !== "object") s.disabledCommands = { prefix: [], slash: [] };
+    if (!Array.isArray(s.disabledCommands.prefix)) s.disabledCommands.prefix = [];
+    if (!Array.isArray(s.disabledCommands.slash)) s.disabledCommands.slash = [];
 
     if (!s.ticket) s.ticket = defaultTicketConfig();
     if (typeof s.autoresponderFilterOn !== "boolean") s.autoresponderFilterOn = true;

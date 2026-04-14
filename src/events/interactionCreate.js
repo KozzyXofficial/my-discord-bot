@@ -3,6 +3,7 @@ import { safeRespond } from "../utils/helpers.js";
 import { asEmbedPayload, buildCoolEmbed } from "../utils/embeds.js";
 import { createTicketChannel, closeTicketByStaff } from "../utils/ticketUtils.js";
 import { getDB } from "../utils/db.js";
+import { getGuildSettings } from "../utils/database.js";
 
 export default {
     name: Events.InteractionCreate,
@@ -16,6 +17,14 @@ export default {
             if (!command) {
                 console.error(`[Interaction] ❌ Command '${cmdName}' not found.`);
                 return safeRespond(interaction, { content: `❌ Command \`${cmdName}\` not found. Deployment mismatch?`, ephemeral: true });
+            }
+
+            // Check if command is disabled for this guild
+            if (interaction.guildId) {
+                const settings = getGuildSettings(interaction.guildId);
+                if ((settings.disabledCommands?.slash ?? []).includes(cmdName)) {
+                    return safeRespond(interaction, { content: "🚫 This command is disabled in this server.", ephemeral: true });
+                }
             }
 
             try {

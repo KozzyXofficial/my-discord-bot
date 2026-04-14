@@ -111,13 +111,16 @@ modHelpPages.push(
         .setTitle("🔧 Moderator Help (7/7)")
         .setDescription(
             "🔤 Command Aliases\n\n" +
-            "Rename **any** prefix command in this server. Default names keep working.\n\n" +
-            "`,alias add <command> <alias>` – Give a command a custom name.\n" +
-            "Example: `,alias add ban yeet` lets you run `,yeet @user`.\n\n" +
+            "`,alias add <command> <alias>` – Add a custom name for any command.\n" +
             "`,alias remove <alias>` – Remove a custom alias.\n" +
-            "`,alias reset <command>` – Clear all aliases for one command.\n" +
-            "`,alias reset all` – Clear every custom alias.\n" +
-            "`,alias list` – Show all custom aliases in this server.\n"
+            "`,alias reset <command|all>` – Clear aliases for a command or all.\n" +
+            "`,alias list` – Show all custom aliases.\n\n" +
+            "🚫 Disable / Enable Commands\n\n" +
+            "`,disable prefix <command>` – Disable a prefix command.\n" +
+            "`,disable slash <command>` – Disable a slash command.\n" +
+            "`,disable list` – Show all disabled commands.\n" +
+            "`,enable prefix <command>` – Re-enable a prefix command.\n" +
+            "`,enable slash <command>` – Re-enable a slash command.\n"
         )
         .setColor(0xed4245)
 );

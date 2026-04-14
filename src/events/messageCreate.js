@@ -285,6 +285,10 @@ export default {
                 if (canonical) command = client.prefixCommands.get(canonical);
             }
             if (command) {
+                // Check if command is disabled for this guild
+                if ((settings.disabledCommands?.prefix ?? []).includes(command.name)) {
+                    return replyEmbed(message, { type: "error", title: "🚫 Command Disabled", description: `\`,${command.name}\` is disabled in this server.` });
+                }
                 try {
                     await command.execute(message, args, client);
                 } catch (error) {
