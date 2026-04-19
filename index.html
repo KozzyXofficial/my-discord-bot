@@ -771,83 +771,55 @@
 
         /*COMMANDS-DATA-BEGIN*/
         const COMMANDS = [
-            // ── utility ──────────────────────────────────────────────────────────
-            { "cmd": "/afk",            "args": "",                       "desc": "Set your AFK status",                                          "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/avatar",         "args": "[user]",                 "desc": "Show a user's avatar",                                         "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/banner",         "args": "[user]",                 "desc": "Show a user's banner",                                         "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/decide",         "args": "<options>",              "desc": "Pick between options (separate with |)",                       "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/define",         "args": "<word>",                 "desc": "Define an English word",                                       "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/features",       "args": "",                       "desc": "Show bot features pages",                                      "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/help",           "args": "",                       "desc": "Show help pages",                                              "cat": "utility",  "popular": true,  "prefix": false },
-            { "cmd": "/invites",        "args": "[user]",                 "desc": "Check invite stats for yourself or another user",              "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/plugins",        "args": "",                       "desc": "Enable or disable optional bot features",                      "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/remind",         "args": "<time> <message>",       "desc": "Set a reminder",                                               "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/serverinfo",     "args": "",                       "desc": "Show info about this server",                                  "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/todo",           "args": "",                       "desc": "Manage your simple to-do list",                                "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/userinfo",       "args": "[user]",                 "desc": "Show info about a user",                                       "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": "/vc",             "args": "",                       "desc": "Manage your dynamic voice channel",                            "cat": "utility",  "popular": false, "prefix": false },
-            { "cmd": ",afk",            "args": "",                       "desc": "Set your AFK status",                                          "cat": "utility",  "popular": false, "prefix": true  },
-            { "cmd": ",boosterrole",    "args": "",                       "desc": "Configure custom roles for server boosters",                   "cat": "utility",  "popular": false, "prefix": true  },
-            // ── moderation ───────────────────────────────────────────────────────
-            { "cmd": "/warn",           "args": "<user> <reason>",        "desc": "Warn a user — tracks warn history",                            "cat": "mod",      "popular": true,  "prefix": false },
-            { "cmd": "/clearwarns",     "args": "<user>",                 "desc": "Clear all warnings for a user",                                "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/kick",           "args": "<user> [reason]",        "desc": "Kick a user from the server",                                  "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/ban",            "args": "<user> [reason]",        "desc": "Ban a user from the server",                                   "cat": "mod",      "popular": true,  "prefix": false },
-            { "cmd": "/unban",          "args": "<user>",                 "desc": "Unban a previously banned user",                               "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/mute",           "args": "<user> <time> [reason]", "desc": "Timeout a user for a set duration",                            "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/unmute",         "args": "<user>",                 "desc": "Remove a timeout from a user",                                 "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/nuke",           "args": "[amount]",               "desc": "Bulk-delete messages from this channel",                       "cat": "mod",      "popular": true,  "prefix": false },
-            { "cmd": "/lock",           "args": "[channel]",              "desc": "Lock a channel so users can't send messages",                  "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/unlock",         "args": "[channel]",              "desc": "Unlock a previously locked channel",                           "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/nicklock",       "args": "<user> <nick>",          "desc": "Force a nickname and lock it",                                 "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/modhelp",        "args": "",                       "desc": "Show moderation help pages",                                   "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": "/wipe_server",    "args": "",                       "desc": "⚠️ DANGER: Delete ALL channels and roles. Server owner only", "cat": "mod",      "popular": false, "prefix": false },
-            { "cmd": ",audit",          "args": "",                       "desc": "View moderation audit logs",                                   "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",ban",            "args": "<user> [reason]",        "desc": "Ban a user from the server",                                   "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",clear",          "args": "[amount]",               "desc": "Bulk delete messages in a channel",                            "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",clearwarns",     "args": "<user>",                 "desc": "Clear all warnings for a user",                                "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",damage",         "args": "<user>",                 "desc": "Apply a custom moderation damage action to a user",            "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",heal",           "args": "<user>",                 "desc": "Remove damage / reset state for a user",                       "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",kick",           "args": "<user> [reason]",        "desc": "Kick a user from the server",                                  "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",lock",           "args": "",                       "desc": "Lock the current channel",                                     "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",nick",           "args": "<user> <nick>",          "desc": "Change a user's nickname",                                     "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",nicklock",       "args": "<user> <nick>",          "desc": "Lock a user's nickname so they cannot change it",              "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",nickunlock",     "args": "<user>",                 "desc": "Unlock a user's nickname",                                     "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",slowmode",       "args": "<seconds>",              "desc": "Set the slowmode for a channel",                               "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",unlock",         "args": "",                       "desc": "Unlock the current channel",                                   "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",unraid",         "args": "",                       "desc": "Disable raid mode protections",                                "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",warn",           "args": "<user> <reason>",        "desc": "Issue a formal warning to a user",                             "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",warnings",       "args": "<user>",                 "desc": "View a user's current warnings",                               "cat": "mod",      "popular": false, "prefix": true  },
-            { "cmd": ",warnthreshold",  "args": "<number>",               "desc": "Set the threshold for auto-actions on warnings",               "cat": "mod",      "popular": false, "prefix": true  },
-            // ── AI ───────────────────────────────────────────────────────────────
-            { "cmd": "/ask",            "args": "<prompt>",               "desc": "Ask Claude AI a question — remembers conversation context",    "cat": "ai",       "popular": true,  "prefix": false },
-            { "cmd": "/summarize",      "args": "",                       "desc": "Summarize the last few messages using Claude",                 "cat": "ai",       "popular": true,  "prefix": false },
-            { "cmd": "/translate",      "args": "<text>",                 "desc": "Translate text — auto-detects source language",                "cat": "ai",       "popular": false, "prefix": false },
-            { "cmd": "/generate_rules", "args": "",                       "desc": "Use AI to generate a custom rules embed for this server",      "cat": "ai",       "popular": false, "prefix": false },
-            { "cmd": "/imagine",        "args": "<prompt>",               "desc": "Generate an image using Pollinations.ai (Flux model)",         "cat": "ai",       "popular": true,  "prefix": false },
-            { "cmd": "/clear_memory",   "args": "",                       "desc": "Clear Claude's conversation history for you in this server",   "cat": "ai",       "popular": false, "prefix": false },
-            // ── setup & config ───────────────────────────────────────────────────
-            { "cmd": "/server_setup",   "args": "[preset]",               "desc": "Scaffold channels, roles, and config from a preset",           "cat": "setup",    "popular": true,  "prefix": false },
-            { "cmd": "/reset_setup",    "args": "",                       "desc": "Delete everything server_setup created and optionally redo it","cat": "setup",    "popular": false, "prefix": false },
-            { "cmd": ",alias",          "args": "",                       "desc": "Manage custom command aliases (add/remove/list)",               "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",appealschannel", "args": "<channel>",              "desc": "Set the channel for ban appeals",                              "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",automod",        "args": "",                       "desc": "Configure built-in AutoMod rules",                             "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",automod_whitelist","args": "",                     "desc": "Manage the AutoMod word whitelist",                            "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",autoresponder",  "args": "",                       "desc": "Configure custom auto-responses",                              "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",autoresponder_filter_off","args": "",              "desc": "Turn off filters for auto-responders",                         "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",autoresponder_filter_on","args": "",               "desc": "Turn on filters for auto-responders",                          "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",case_channel",   "args": "<channel>",              "desc": "Set the channel for moderation case logs",                     "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",disable",        "args": "<command>",              "desc": "Globally disable a prefix command in the server",              "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",enable",         "args": "<command>",              "desc": "Re-enable a previously disabled command",                      "cat": "setup",    "popular": false, "prefix": true  },
-            { "cmd": ",prefix_delete_respond_cooldown","args": "<time>", "desc": "Set cooldown for auto-deletion of bot responses",              "cat": "setup",    "popular": false, "prefix": true  },
-            // ── tickets ──────────────────────────────────────────────────────────
-            { "cmd": "/appeal",         "args": "",                       "desc": "Submit a ban appeal to a server",                              "cat": "tickets",  "popular": false, "prefix": false },
-            { "cmd": ",ticket",         "args": "",                       "desc": "Main command for ticket system configuration",                 "cat": "tickets",  "popular": false, "prefix": true  },
-            { "cmd": ",ticket_channel", "args": "<channel>",              "desc": "Set the parent category or channel for tickets",               "cat": "tickets",  "popular": false, "prefix": true  },
-            { "cmd": ",ticket_close",   "args": "",                       "desc": "Close an active ticket",                                       "cat": "tickets",  "popular": false, "prefix": true  },
-            { "cmd": ",ticket_edit",    "args": "",                       "desc": "Edit ticket system settings",                                  "cat": "tickets",  "popular": false, "prefix": true  },
-            { "cmd": ",ticket_ping",    "args": "<role>",                 "desc": "Set the role to be pinged when a ticket is opened",            "cat": "tickets",  "popular": false, "prefix": true  },
-        ];
+            {
+                        "cmd": "/modhelp",
+                        "args": "",
+                        "desc": "Show moderation help pages",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            },
+            {
+                        "cmd": "/test",
+                        "args": "",
+                        "desc": "Test if the bot is working.",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            },
+            {
+                        "cmd": "/coinflip",
+                        "args": "",
+                        "desc": "Flip a coin.",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            },
+            {
+                        "cmd": "/stats",
+                        "args": "",
+                        "desc": "Show bot stats.",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            },
+            {
+                        "cmd": "/pong",
+                        "args": "",
+                        "desc": "Replies with /ping.",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            },
+            {
+                        "cmd": "/appeal",
+                        "args": "",
+                        "desc": "Submit a ban appeal to a server.",
+                        "cat": "General",
+                        "popular": false,
+                        "prefix": true
+            }
+];
         /*COMMANDS-DATA-END*/
 
         const FEATURES = [
