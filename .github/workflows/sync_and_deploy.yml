@@ -25,6 +25,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html kozzyxbotmain.html
+          git add website/index.html website/kozzyxbotmain.html
           git commit -m "Auto-sync bot commands to website" || echo "No changes to commit"
           git push
