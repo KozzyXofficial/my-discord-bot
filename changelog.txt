@@ -15,6 +15,6 @@
 - Requires Ban Members permission
 
 [2026-04-19] feat: add random command
-- Added /random slash command with subcommands: number, user, coinflip, dice
+- Added /random slash command with subcommands: number, user, coinflip, dice, 8ball
 - Added ,random prefix command (aliases: ,rng)
 - Integrated into the utility-bot fun category

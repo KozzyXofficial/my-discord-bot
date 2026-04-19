@@ -32,6 +32,14 @@ export default {
                 options: [
                     { name: "sides", description: "Number of sides (default 6)", type: 4, required: false }
                 ]
+            },
+            {
+                name: "8ball",
+                description: "Ask the magic 8-ball a question",
+                type: 1, // SUB_COMMAND
+                options: [
+                    { name: "question", description: "The question to ask", type: 3, required: true }
+                ]
             }
         ]
     },
@@ -67,6 +75,17 @@ export default {
             const res = Math.floor(Math.random() * sides) + 1;
             title = "🎲 Dice Roll";
             description = `You rolled a **${res}** on a **${sides}**-sided die.`;
+        } else if (sub === "8ball") {
+            const question = i.options.getString("question");
+            const responses = [
+                "It is certain.", "It is decidedly so.", "Without a doubt.", "Yes definitely.", "You may rely on it.",
+                "As I see it, yes.", "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.",
+                "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.",
+                "Don't count on it.", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."
+            ];
+            const res = responses[Math.floor(Math.random() * responses.length)];
+            title = "🔮 Magic 8-Ball";
+            description = `**Question:** ${question}\n**Answer:** ${res}`;
         }
 
         return safeRespond(i, asEmbedPayload({
