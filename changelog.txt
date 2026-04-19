@@ -1,0 +1,6 @@
+[2026-04-19] feat: add softban command
+- Added ,softban @user [reason] prefix command to mod-bot
+- Bans the user with 7 days of message deletion, then immediately unbans so they can rejoin
+- DMs the user explaining they were softbanned
+- Logs a case to the mod case channel
+- Requires Ban Members permission
