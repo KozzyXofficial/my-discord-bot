@@ -5,7 +5,7 @@ import json
 # Configuration
 BOT_ROOT = './bots'
 WEB_ROOT = '.'
-HTML_FILES = ['website/index.html', 'website/kozzyxbotmain.html', 'website/kozzyx_v2_sleek.html']
+HTML_FILES = ['website/index.html', 'website/kozzyxbotmain.html']
 
 # Categories mapping
 DIR_TO_CAT = {
