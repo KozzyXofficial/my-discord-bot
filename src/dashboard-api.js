@@ -1,8 +1,12 @@
 import http from 'http';
-import { URL } from 'url';
+import fs from 'fs';
+import path from 'path';
+import { URL, fileURLToPath } from 'url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = 3456;
 const AUTH_KEY = 'Balazs9849';
+const REDIRECT_URI = 'http://104.199.127.109:3456/dashboard.html';
 
 // In-memory data
 let botLogs = [];
@@ -15,12 +19,15 @@ let botStats = {
     shards: 1
 };
 
+// Simple Session Store
+const sessions = new Map();
+
 export function initAPI(client) {
-    const server = http.createServer((req, res) => {
+    const server = http.createServer(async (req, res) => {
         // CORS Headers
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key, Authorization');
 
         if (req.method === 'OPTIONS') {
             res.writeHead(204);
@@ -29,17 +36,91 @@ export function initAPI(client) {
         }
 
         const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
-        const path = parsedUrl.pathname;
+        const pathname = parsedUrl.pathname;
 
-        // Simple Auth
+        // --- STATIC FILE SERVING ---
+        // This allows you to visit http://IP:3456/dashboard.html
+        if (pathname === '/dashboard.html' || pathname === '/') {
+            const filePath = path.join(__dirname, '../website/dashboard.html');
+            if (fs.existsSync(filePath)) {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(fs.readFileSync(filePath));
+                return;
+            }
+        }
+
+        // --- AUTH ENDPOINTS (Public) ---
+        
+        if (pathname === '/api/auth/login' && req.method === 'GET') {
+            const clientID = process.env.CLIENT_ID;
+            const url = `https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20guilds`;
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ url }));
+            return;
+        }
+
+        if (pathname === '/api/auth/callback' && req.method === 'POST') {
+            let body = '';
+            req.on('data', chunk => { body += chunk; });
+            req.on('end', async () => {
+                try {
+                    const { code } = JSON.parse(body);
+                    const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            client_id: process.env.CLIENT_ID,
+                            client_secret: process.env.CLIENT_SECRET,
+                            code,
+                            grant_type: 'authorization_code',
+                            redirect_uri: REDIRECT_URI,
+                            scope: 'identify guilds',
+                        }),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    });
+
+                    const tokens = await tokenResponse.json();
+                    if (!tokens.access_token) throw new Error(tokens.error_description || 'Failed to get access token');
+
+                    const userRes = await fetch('https://discord.com/api/users/@me', {
+                        headers: { Authorization: `Bearer ${tokens.access_token}` }
+                    });
+                    const userData = await userRes.json();
+
+                    // ADMIN CHECK
+                    const guild = client.guilds.cache.get(process.env.GUILD_ID);
+                    if (!guild) throw new Error('Primary server not found in bot cache');
+                    const member = await guild.members.fetch(userData.id).catch(() => null);
+                    
+                    if (!member || !member.permissions.has('Administrator')) {
+                        res.writeHead(403, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Access Denied: Admin only.' }));
+                        return;
+                    }
+
+                    const sessionToken = Math.random().toString(36).substring(2) + Date.now().toString(36);
+                    sessions.set(sessionToken, userData);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ token: sessionToken, user: userData }));
+                } catch (err) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: err.message }));
+                }
+            });
+            return;
+        }
+
+        // --- PROTECTED API ENDPOINTS ---
+        const authHeader = req.headers['authorization'];
+        const sessionToken = authHeader ? authHeader.split(' ')[1] : null;
         const apiKey = req.headers['x-api-key'];
-        if (apiKey !== AUTH_KEY) {
+
+        if (!sessions.has(sessionToken) && apiKey !== AUTH_KEY) {
             res.writeHead(401, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Unauthorized' }));
             return;
         }
 
-        if (path === '/api/stats' && req.method === 'GET') {
+        if (pathname === '/api/stats' && req.method === 'GET') {
             const data = {
                 ...botStats,
                 uptime: Math.floor((Date.now() - botStats.uptime) / 1000),
@@ -49,12 +130,12 @@ export function initAPI(client) {
             };
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(data));
-        }
-        else if (path === '/api/logs' && req.method === 'GET') {
+        } 
+        else if (pathname === '/api/logs' && req.method === 'GET') {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(botLogs));
         }
-        else if (path === '/api/message' && req.method === 'POST') {
+        else if (pathname === '/api/message' && req.method === 'POST') {
             let body = '';
             req.on('data', chunk => { body += chunk.toString(); });
             req.on('end', async () => {
@@ -83,11 +164,10 @@ export function initAPI(client) {
     });
 
     server.listen(PORT, () => {
-        console.log(`[API] Dashboard backend running on port ${PORT}`);
-        addLog('OK', `API server started on port ${PORT}`);
+        console.log(`[API] Dashboard hosted on port ${PORT}`);
+        addLog('OK', `API & Dashboard server started on port ${PORT}`);
     });
 
-    // Hook into global console for logs (very basic)
     const originalLog = console.log;
     console.log = (...args) => {
         originalLog(...args);
