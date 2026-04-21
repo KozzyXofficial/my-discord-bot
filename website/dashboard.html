@@ -3095,7 +3095,8 @@
                                         </td>
                                         <td><span class="role-pill" style="--role-color: oklch(0.80 0.15 80)">Mod</span>
                                             <span class="role-pill"
-                                                style="--role-color: oklch(0.72 0.15 220)">VIP</span></td>
+                                                style="--role-color: oklch(0.72 0.15 220)">VIP</span>
+                                        </td>
                                         <td class="mono">2024-02-19</td>
                                         <td><span style="color:var(--ok); font-size:12px" class="mono">2m</span></td>
                                         <td style="text-align:right"><button class="btn sm ghost">Manage</button></td>
@@ -3305,7 +3306,8 @@
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round">
                                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                    </svg></div>
+                                    </svg>
+                                </div>
                                 <div style="flex:1;">
                                     <div class="rule-title">Caps lock filter</div>
                                     <div class="rule-sub">Messages &gt; 70% caps, min 12 chars</div>
@@ -4183,16 +4185,26 @@
         // Utility: API Fetch
         async function apiFetch(path, options = {}) {
             const token = localStorage.getItem('kozzyx_session');
-            const res = await fetch(`${API.base}${path}`, {
-                ...options,
-                headers: {
-                    ...options.headers,
-                    'Authorization': `Bearer ${token}`,
-                    'x-api-key': API.key,
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (res.status === 401) return logout();
+            let res;
+            try {
+                res = await fetch(`${API.base}${path}`, {
+                    ...options,
+                    headers: {
+                        ...options.headers,
+                        'Authorization': `Bearer ${token}`,
+                        'x-api-key': API.key,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            } catch (networkErr) {
+                // Tunnel offline or network error — don't log out, just throw
+                throw new Error('Network error: ' + networkErr.message);
+            }
+            // Only log out if we have a token and the server explicitly rejects it
+            if (res.status === 401 && token) {
+                logout();
+                return;
+            }
             if (!res.ok) throw new Error(`API Error: ${res.status}`);
             return res.json();
         }
@@ -4227,7 +4239,9 @@
         function logout() {
             localStorage.removeItem('kozzyx_session');
             localStorage.removeItem('kozzyx_user');
-            checkAuth();
+            window.location.hash = '';
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('app').style.display = 'none';
         }
 
         function checkAuth() {
