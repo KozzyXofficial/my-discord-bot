@@ -23,9 +23,11 @@ const sessions = new Map();
 
 export function initAPI(client) {
     const server = http.createServer(async (req, res) => {
+        // ULTIMATE CORS HEADERS
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key, Authorization');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key, Authorization, Origin, Accept');
+        res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours cache
 
         if (req.method === 'OPTIONS') {
             res.writeHead(204);
@@ -60,8 +62,6 @@ export function initAPI(client) {
             req.on('end', async () => {
                 try {
                     const { code } = JSON.parse(body);
-                    console.log(`[AUTH] Attempting code exchange with REDIRECT_URI: ${REDIRECT_URI}`);
-                    
                     const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
                         method: 'POST',
                         body: new URLSearchParams({
@@ -76,10 +76,7 @@ export function initAPI(client) {
                     });
 
                     const tokens = await tokenResponse.json();
-                    if (!tokens.access_token) {
-                        console.error('[AUTH ERROR] Discord Token Response:', tokens);
-                        throw new Error(tokens.error_description || tokens.error || 'Failed to get access token');
-                    }
+                    if (!tokens.access_token) throw new Error(tokens.error_description || 'Failed to get access token');
 
                     const userRes = await fetch('https://discord.com/api/users/@me', {
                         headers: { Authorization: `Bearer ${tokens.access_token}` }
@@ -89,25 +86,19 @@ export function initAPI(client) {
                     // ADMIN CHECK
                     const guild = client.guilds.cache.get(process.env.GUILD_ID);
                     const member = guild ? await guild.members.fetch(userData.id).catch(() => null) : null;
-                    
-                    const isOwner = userData.id === 'YOUR_ID_HERE'; // Fallback for you
                     const isAdmin = member && member.permissions.has('Administrator');
 
-                    if (!isAdmin && !isOwner) {
-                        console.warn(`[AUTH] Access denied for user ${userData.username} (${userData.id})`);
+                    if (!isAdmin && userData.id !== 'YOUR_ID_HERE') {
                         res.writeHead(403, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'Access Denied: Administrator role required.' }));
+                        res.end(JSON.stringify({ error: 'Access Denied' }));
                         return;
                     }
 
                     const sessionToken = Math.random().toString(36).substring(2) + Date.now().toString(36);
                     sessions.set(sessionToken, userData);
-                    console.log(`[AUTH] Login successful for ${userData.username}`);
-                    
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ token: sessionToken, user: userData }));
                 } catch (err) {
-                    console.error('[AUTH ERROR]', err.message);
                     res.writeHead(400, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: err.message }));
                 }
