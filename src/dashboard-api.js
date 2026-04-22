@@ -123,7 +123,8 @@ export function initAPI(client) {
                 uptime: Math.floor((Date.now() - botStats.uptime) / 1000),
                 members: client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0),
                 guilds: client.guilds.cache.size,
-                online: client.ws.status === 0
+                online: client.ws.status === 0,
+                guildName: client.guilds.cache.get(process.env.GUILD_ID)?.name || "Kozzy's Lair"
             };
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(data));

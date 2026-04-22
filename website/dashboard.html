@@ -2432,11 +2432,11 @@
             </a>
 
             <div class="sidebar-foot">
-                <div class="server-switcher" onclick="alert('Server switcher — backend: GET /api/guilds')">
-                    <div class="server-icon">KO</div>
+                <div class="server-switcher" style="cursor:default">
+                    <div class="server-icon" id="server-icon">KO</div>
                     <div class="server-switcher-text">
-                        <b>kozzy's lair</b>
-                        <small>1,247 members</small>
+                        <b id="server-name">kozzy's lair</b>
+                        <small id="server-members">loading...</small>
                     </div>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         style="color:var(--fg-faint)">
@@ -4291,6 +4291,9 @@
                 document.getElementById('stat-guilds').textContent = stats.guilds;
                 document.getElementById('stat-status').textContent = stats.online ? 'Online' : 'Offline';
                 document.getElementById('overview-summary').textContent = `Bot is ${stats.online ? 'online' : 'offline'} across ${stats.guilds} servers with ${stats.members?.toLocaleString()} members.`;
+                // Update sidebar server info
+                if (stats.members) document.getElementById('server-members').textContent = stats.members.toLocaleString() + ' members';
+                if (stats.guildName) document.getElementById('server-name').textContent = stats.guildName;
             } catch (err) { console.error('Stats refresh failed:', err); }
         }
 
