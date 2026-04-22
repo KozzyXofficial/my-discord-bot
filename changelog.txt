@@ -1,7 +1,7 @@
 [2026-04-21] refactor: consolidate all bots into single root bot
 - Removed bots/ folder structure (mod-bot, utility-bot, ticket-bot, ai-bot)
 - Merged ALL commands into one bot at the project root
-- Added slash commands: coinflip, hug, roast, topic, random (fun), afk, avatar, banner, clear_memory, decide, define, features, generate_rules, help, imagine, invites, nuke, plugins, redo_server_setup, remind, server_setup, serverinfo, summarize, todo, translate, userinfo, vc, wipe_server (general)
+- Added slash commands: coinflip, hug, roast, topic, random (fun), afk, appeal, ask, avatar, banner, clear_memory, decide, define, features, generate_rules, help, imagine, invites, nuke, plugins, redo_server_setup, remind, server_setup, serverinfo, summarize, todo, translate, userinfo, vc, wipe_server (general)
 - Added prefix commands: autoresponder, ticket config commands, afk, boosterrole (features), coinflip, random (fun)
 - Added voiceStateUpdate event handler
 - Added utils: ai, inviteTracker, reminders, ticketUtils
