@@ -521,93 +521,16 @@
         const COMMANDS = [
             // Automatically Synced Commands
             {
-                        "cmd": "/Full Community Server",
+                        "cmd": "/afk",
                         "args": "",
-                        "desc": "Delete everything server_setup created and optionally redo it.",
+                        "desc": "Set your AFK status",
                         "cat": "utility",
                         "popular": false
             },
             {
-                        "cmd": "/remind",
+                        "cmd": "/ask",
                         "args": "",
-                        "desc": "Set a reminder",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/appeal",
-                        "args": "",
-                        "desc": "Submit a ban appeal to a server.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/vc",
-                        "args": "",
-                        "desc": "Manage your dynamic voice channel.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/translate",
-                        "args": "",
-                        "desc": "Translate text using AI",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/decide",
-                        "args": "",
-                        "desc": "Pick between options",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/Flux (default)",
-                        "args": "",
-                        "desc": "Generate an image using Pollinations.ai",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/modhelp",
-                        "args": "",
-                        "desc": "Show moderation help pages",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/serverinfo",
-                        "args": "",
-                        "desc": "Show info about this server",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/clear_memory",
-                        "args": "",
-                        "desc": "Clear Claude's conversation history for you in this server.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/todo",
-                        "args": "",
-                        "desc": "Manage your simple to-do list",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/help",
-                        "args": "",
-                        "desc": "Show help pages",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/nuke",
-                        "args": "",
-                        "desc": "Delete messages from this channel.",
+                        "desc": "Ask Claude AI a question",
                         "cat": "utility",
                         "popular": false
             },
@@ -619,346 +542,220 @@
                         "popular": false
             },
             {
-                        "cmd": "/ask",
-                        "args": "",
-                        "desc": "Ask Claude AI a question",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/\ud83d\udc51 Owner",
-                        "args": "",
-                        "desc": "Everything: roles, info, community, voice, support, staff tools.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/invites",
-                        "args": "",
-                        "desc": "Check invite stats for yourself or another user.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/banner",
-                        "args": "",
-                        "desc": "Show a user's banner",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/userinfo",
-                        "args": "",
-                        "desc": "Show info about a user",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/afk",
-                        "args": "",
-                        "desc": "Set your AFK status",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/generate_rules",
-                        "args": "",
-                        "desc": "Use AI to generate a custom rules embed for this server.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/define",
-                        "args": "",
-                        "desc": "Define an English word",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/summarize",
-                        "args": "",
-                        "desc": "Summarize the last few messages",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/features",
-                        "args": "",
-                        "desc": "Show bot features pages",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/plugins",
-                        "args": "",
-                        "desc": "Enable or disable optional bot features.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/wipe_server",
-                        "args": "",
-                        "desc": "\u26a0\ufe0f DANGER: Delete ALL channels and roles. Server owner only.",
-                        "cat": "utility",
-                        "popular": false
-            },
-            {
-                        "cmd": "/Full Community Server",
-                        "args": "",
-                        "desc": "Delete everything server_setup created and optionally redo it.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/remind",
-                        "args": "",
-                        "desc": "Set a reminder",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/appeal",
-                        "args": "",
-                        "desc": "Submit a ban appeal to a server.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/vc",
-                        "args": "",
-                        "desc": "Manage your dynamic voice channel.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/translate",
-                        "args": "",
-                        "desc": "Translate text using AI",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/decide",
-                        "args": "",
-                        "desc": "Pick between options",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/Flux (default)",
-                        "args": "",
-                        "desc": "Generate an image using Pollinations.ai",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
                         "cmd": "/modhelp",
                         "args": "",
                         "desc": "Show moderation help pages",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/serverinfo",
-                        "args": "",
-                        "desc": "Show info about this server",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/clear_memory",
-                        "args": "",
-                        "desc": "Clear Claude's conversation history for you in this server.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/todo",
-                        "args": "",
-                        "desc": "Manage your simple to-do list",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/help",
-                        "args": "",
-                        "desc": "Show help pages",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/nuke",
-                        "args": "",
-                        "desc": "Delete messages from this channel.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/avatar",
-                        "args": "",
-                        "desc": "Show a user's avatar",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/ask",
-                        "args": "",
-                        "desc": "Ask Claude AI a question",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/\ud83d\udc51 Owner",
-                        "args": "",
-                        "desc": "Everything: roles, info, community, voice, support, staff tools.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/invites",
-                        "args": "",
-                        "desc": "Check invite stats for yourself or another user.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/banner",
-                        "args": "",
-                        "desc": "Show a user's banner",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/userinfo",
-                        "args": "",
-                        "desc": "Show info about a user",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/afk",
-                        "args": "",
-                        "desc": "Set your AFK status",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/generate_rules",
-                        "args": "",
-                        "desc": "Use AI to generate a custom rules embed for this server.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/define",
-                        "args": "",
-                        "desc": "Define an English word",
-                        "cat": "tickets",
+                        "cat": "utility",
                         "popular": false
             },
             {
                         "cmd": "/summarize",
                         "args": "",
                         "desc": "Summarize the last few messages",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/features",
-                        "args": "",
-                        "desc": "Show bot features pages",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/plugins",
-                        "args": "",
-                        "desc": "Enable or disable optional bot features.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/wipe_server",
-                        "args": "",
-                        "desc": "\u26a0\ufe0f DANGER: Delete ALL channels and roles. Server owner only.",
-                        "cat": "tickets",
-                        "popular": false
-            },
-            {
-                        "cmd": "/translate",
-                        "args": "",
-                        "desc": "Translate text using AI",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/Flux (default)",
-                        "args": "",
-                        "desc": "Generate an image using Pollinations.ai",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/clear_memory",
-                        "args": "",
-                        "desc": "Clear Claude's conversation history for you in this server.",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/ask",
-                        "args": "",
-                        "desc": "Ask Claude AI a question",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/generate_rules",
-                        "args": "",
-                        "desc": "Use AI to generate a custom rules embed for this server.",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/summarize",
-                        "args": "",
-                        "desc": "Summarize the last few messages",
-                        "cat": "ai",
-                        "popular": false
-            },
-            {
-                        "cmd": "/appeal",
-                        "args": "",
-                        "desc": "Submit a ban appeal to a server.",
-                        "cat": "mod",
-                        "popular": false
-            },
-            {
-                        "cmd": "/modhelp",
-                        "args": "",
-                        "desc": "Show moderation help pages",
-                        "cat": "mod",
-                        "popular": false
-            },
-            {
-                        "cmd": "/stats",
-                        "args": "",
-                        "desc": "Show bot stats.",
-                        "cat": "mod",
+                        "cat": "utility",
                         "popular": false
             },
             {
                         "cmd": "/test",
                         "args": "",
                         "desc": "Test if the bot is working.",
-                        "cat": "mod",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/features",
+                        "args": "",
+                        "desc": "Show bot features pages",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/translate",
+                        "args": "",
+                        "desc": "Translate text using AI",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/vc",
+                        "args": "",
+                        "desc": "Manage your dynamic voice channel.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/serverinfo",
+                        "args": "",
+                        "desc": "Show info about this server",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/plugins",
+                        "args": "",
+                        "desc": "Enable or disable optional bot features.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/generate_rules",
+                        "args": "",
+                        "desc": "Use AI to generate a custom rules embed for this server.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/Flux (default)",
+                        "args": "",
+                        "desc": "Generate an image using Pollinations.ai",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/define",
+                        "args": "",
+                        "desc": "Define an English word",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/wipe_server",
+                        "args": "",
+                        "desc": "\u26a0\ufe0f DANGER: Delete ALL channels and roles. Server owner only.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/invites",
+                        "args": "",
+                        "desc": "Check invite stats for yourself or another user.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/help",
+                        "args": "",
+                        "desc": "Show help pages",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/todo",
+                        "args": "",
+                        "desc": "Manage your simple to-do list",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/remind",
+                        "args": "",
+                        "desc": "Set a reminder",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/nuke",
+                        "args": "",
+                        "desc": "Delete messages from this channel.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/banner",
+                        "args": "",
+                        "desc": "Show a user's banner",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/\ud83d\udc51 Owner",
+                        "args": "",
+                        "desc": "Everything: roles, info, community, voice, support, staff tools.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/Full Community Server",
+                        "args": "",
+                        "desc": "Delete everything server_setup created and optionally redo it.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/decide",
+                        "args": "",
+                        "desc": "Pick between options",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/clear_memory",
+                        "args": "",
+                        "desc": "Clear Claude's conversation history for you in this server.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/userinfo",
+                        "args": "",
+                        "desc": "Show info about a user",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/stats",
+                        "args": "",
+                        "desc": "Show bot stats.",
+                        "cat": "utility",
                         "popular": false
             },
             {
                         "cmd": "/pong",
                         "args": "",
                         "desc": "Replies with /ping.",
-                        "cat": "mod",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/appeal",
+                        "args": "",
+                        "desc": "Submit a ban appeal to a server.",
+                        "cat": "utility",
+                        "popular": false
+            },
+            {
+                        "cmd": "/hug",
+                        "args": "",
+                        "desc": "Hug someone",
+                        "cat": "fun",
+                        "popular": false
+            },
+            {
+                        "cmd": "/random",
+                        "args": "",
+                        "desc": "Generate something random",
+                        "cat": "fun",
+                        "popular": false
+            },
+            {
+                        "cmd": "/coinflip",
+                        "args": "",
+                        "desc": "Flip a coin",
+                        "cat": "fun",
+                        "popular": false
+            },
+            {
+                        "cmd": "/roast",
+                        "args": "",
+                        "desc": "Roast someone with AI",
+                        "cat": "fun",
+                        "popular": false
+            },
+            {
+                        "cmd": "/topic",
+                        "args": "",
+                        "desc": "Get a random conversation topic",
+                        "cat": "fun",
                         "popular": false
             }
 ];
