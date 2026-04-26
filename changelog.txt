@@ -1,3 +1,17 @@
+[2026-04-27] feat: polish all remaining general slash commands (Phase 4)
+- /decide: deduplicates options, caps at 25, shows numbered list with winner highlighted, proper error embeds
+- /define: deferred reply, shows up to 4 meanings with 2 defs each + examples, phonetic display, audio link
+- /generate_rules: no functional change, already refactored in previous session
+- /invites: no functional change, already refactored in previous session
+- /nuke: no functional change, already refactored in previous session
+- /pong: added pingHealth() colour indicators for WebSocket and API latency
+- /remind: added 1-year cap, 1000-char content limit, richer embed with ID + timestamp fields
+- /stats: added member/channel totals, command counts, RSS memory, discord.js version, ping health, uptime shows seconds
+- /todo add: validates length (500 chars) and list cap (50 items), shows task ID on success
+- /todo list: shows creation timestamps, usage count in footer
+- /todo remove: fetches and shows the removed task text, proper error embed
+- /todo clear: reports how many tasks were removed
+
 [2026-04-27] security: harden Claude AI safety filter against jailbreaks and prompt injection
 - Added locked SAFETY_SYSTEM_PROMPT injected into every user-facing Claude call (ask, translate, summarize, conversation history)
 - Added detectJailbreak() with 20+ regex patterns catching: DAN, developer mode, god mode, "ignore instructions", "no restrictions", prompt injection via [SYSTEM], and more
