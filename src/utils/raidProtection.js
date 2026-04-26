@@ -169,6 +169,33 @@ export function clearRecentRaiders(guildId) {
     recentRaiders.delete(guildId);
 }
 
+// ── SIMULATION ────────────────────────────────────────────────────────────
+// Pre-fills the join window with fake entries so the next checkRaid call
+// pushes it over threshold and triggers the full raid response.
+export function primeSimulation(guildId, count) {
+    const now = Date.now();
+    const entries = Array.from({ length: count - 1 }, (_, i) => ({
+        id: `sim_${i}`,
+        tag: `SimRaider${i + 1}#0000`,
+        joinedAt: now,
+        accountAge: 2 * 86400000, // 2-day-old fake accounts
+    }));
+    joinWindows.set(guildId, entries);
+}
+
+// Build a minimal fake member object that checkRaid can consume.
+export function makeFakeMember(guild, index) {
+    return {
+        guild,
+        id: `sim_${index}`,
+        kick: () => Promise.resolve(),
+        user: {
+            tag: `SimRaider${index}#0000`,
+            createdTimestamp: Date.now() - 2 * 86400000,
+        },
+    };
+}
+
 // ── MASS-MENTION DETECTION ──────────────────────────────────────────────
 const massMentionCooldown = new Map(); // userId -> last action timestamp
 

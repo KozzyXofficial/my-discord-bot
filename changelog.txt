@@ -1,3 +1,10 @@
+[2026-04-27] feat: add /antiraid test simulation command
+- New /antiraid slash command (ManageGuild only) with a `test` subcommand
+- Simulates a join spike of N fake accounts (defaults to configured threshold)
+- Triggers the full raid pipeline: alert embed, lockdown/kick/ban action, case log, owner DM
+- No real accounts are affected; fake IDs silently fail on kick/ban
+- Added primeSimulation() and makeFakeMember() helpers to raidProtection.js
+
 [2026-04-27] feat: polish all remaining general slash commands (Phase 4)
 - /decide: deduplicates options, caps at 25, shows numbered list with winner highlighted, proper error embeds
 - /define: deferred reply, shows up to 4 meanings with 2 defs each + examples, phonetic display, audio link
