@@ -97,6 +97,21 @@ export async function initDB() {
             guild_id TEXT NOT NULL,
             created_at INTEGER NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS mod_cases (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            guild_id TEXT NOT NULL,
+            case_number INTEGER NOT NULL,
+            action TEXT NOT NULL,
+            target_id TEXT NOT NULL,
+            target_tag TEXT,
+            executor_id TEXT NOT NULL,
+            executor_tag TEXT,
+            reason TEXT,
+            duration_ms INTEGER,
+            created_at INTEGER NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_mod_cases_guild ON mod_cases (guild_id, case_number);
+        CREATE INDEX IF NOT EXISTS idx_mod_cases_target ON mod_cases (guild_id, target_id);
     `);
     console.log("✅ Database initialized");
     return db;
