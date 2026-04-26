@@ -1,0 +1,280 @@
+KozzyX Discord Bot — Full Command List
+Last updated: 2026-04-26
+Total: 63 commands (29 slash + 34 prefix)
+Prefix: ,
+
+═══════════════════════════════════════════════
+  SLASH COMMANDS — GENERAL
+═══════════════════════════════════════════════
+
+/afk [reason]
+  Set your AFK status. Others are notified when they ping you.
+  Auto-removed when you send a message.
+
+/appeal
+  Submit a ban appeal to a server.
+
+/ask <question>
+  Ask Claude AI a question. Remembers conversation history per user per server.
+
+/avatar [@user]
+  Show your own or another user's avatar.
+
+/banner [@user]
+  Show your own or another user's banner.
+
+/clear_memory
+  Clear Claude AI's conversation history for you in this server.
+
+/decide <options>
+  Let the AI pick between your options.
+
+/define <word>
+  Look up the definition of an English word.
+
+/features
+  Show a paginated list of all bot features and background systems.
+
+/generate_rules
+  Use AI to generate a custom rules embed for this server.
+
+/help
+  Show a paginated overview of all bot commands.
+
+/imagine <prompt> [model]
+  Generate an image using AI (Flux, Flux Realism models).
+
+/invites [@user]
+  Check invite stats for yourself or another user. Shows invite leaderboard.
+
+/modhelp
+  Show a paginated moderator help guide (5 pages).
+
+/nuke [amount]
+  Bulk delete messages from the current channel (up to 100 at a time).
+
+/plugins
+  Enable or disable optional bot features per server (e.g. Audit Log).
+
+/pong
+  Check if the bot is alive. Replies with /ping.
+
+/redo_server_setup
+  Delete everything server_setup created and optionally redo it.
+
+/remind <time> <message>
+  Set a reminder. The bot will DM you when the time is up.
+  Supports: 10m, 2h, 1d, etc.
+
+/server_setup
+  Run the initial server setup (creates roles, channels, categories).
+
+/serverinfo
+  Show information about this server.
+
+/stats
+  Show bot stats: server count, ping, uptime, memory, Node.js version.
+
+/summarize
+  Summarize the last few messages in the channel using AI.
+
+/test
+  Test if the bot is working.
+
+/todo [add|remove|list] [item]
+  Manage your personal to-do list.
+
+/translate <text> [language]
+  Translate text to another language using AI.
+
+/userinfo [@user]
+  Show information about a user (joined, roles, ID, etc.).
+
+/vc <action>
+  Manage your dynamic voice channel.
+  Actions: rename, lock, unlock, limit, kick, transfer, delete.
+
+/wipe_server
+  DANGER: Delete ALL channels and roles. Server owner only.
+  Requires multiple confirmations.
+
+═══════════════════════════════════════════════
+  SLASH COMMANDS — FUN
+═══════════════════════════════════════════════
+
+/coinflip
+  Flip a coin. Returns heads or tails.
+
+/hug [@user]
+  Send a hug to someone with a GIF.
+
+/random [min] [max]
+  Generate a random number between two values.
+
+/roast [@user]
+  Roast someone with an AI-generated roast.
+
+/topic
+  Get a random conversation topic.
+
+═══════════════════════════════════════════════
+  PREFIX COMMANDS — MODERATION  (prefix: ,)
+═══════════════════════════════════════════════
+
+,kick @user [reason]
+  Kick a user from the server.
+  Requires: Kick Members
+
+,ban @user [reason]
+  Ban a user from the server.
+  Requires: Ban Members
+
+,softban @user [reason]
+  Ban then immediately unban a user (removes their recent messages).
+  Requires: Ban Members
+
+,damage @user <time>
+  Timeout (mute) a user for a duration. Examples: 10m, 2h, 1d.
+  Requires: Timeout Members
+
+,heal @user
+  Remove a timeout from a user.
+  Requires: Timeout Members
+
+,unraid
+  Lift a raid lockdown on the server. Admin only.
+  Requires: Administrator
+
+,warn @user [reason]
+  Warn a user. Logged to their warning history.
+  Requires: Timeout Members
+
+,warn remove @user [count]
+  Remove a number of warnings from a user.
+  Requires: Timeout Members
+
+,warnings [@user]
+  View the warning count and history for a user.
+
+,clearwarns @user
+  Clear all warnings for a user.
+  Requires: Timeout Members
+
+,warnthreshold add <count> <action> [minutes]
+  Set an automatic action when a user reaches a warning count.
+  Actions: kick, ban, timeout
+  Example: ,warnthreshold add 3 timeout 60
+
+,warnthreshold remove <count>
+  Remove a warning threshold.
+
+,warnthreshold list
+  List all warning thresholds for this server.
+
+,lock [#channel] [reason]
+  Lock a channel so members cannot send messages.
+  Requires: Manage Channels
+
+,unlock [#channel]
+  Unlock a previously locked channel.
+  Requires: Manage Channels
+
+,slowmode [#channel] <seconds|off>
+  Set slowmode on a channel. Use "off" to disable.
+  Requires: Manage Channels
+
+,clear <amount>
+  Delete 1–100 messages from the current channel.
+  Requires: Manage Messages
+
+,nick @user <new nickname>
+  Change a user's nickname.
+  Requires: Manage Nicknames
+
+,nicklock @user
+  Lock a user's nickname so they cannot change it.
+  Requires: Manage Nicknames
+
+,nickunlock @user
+  Unlock a user's nickname.
+  Requires: Manage Nicknames
+
+,audit @user
+  View the audit log entries for a user.
+  Requires: View Audit Log + Audit Log plugin enabled
+
+═══════════════════════════════════════════════
+  PREFIX COMMANDS — CONFIG  (prefix: ,)
+═══════════════════════════════════════════════
+
+,case_channel #channel
+  Set the channel where moderation and ticket cases are posted.
+
+,appeals_channel #channel
+  Set the channel where ban appeal cases are posted.
+
+,ticket_channel #channel
+  Set the channel where the ticket panel will be posted.
+
+,ticket
+  Post the ticket panel in the designated ticket channel.
+
+,ticket_edit [title|text|categories] <value>
+  Edit the ticket panel title, description text, or categories.
+
+,ticket_close <time|off>
+  Set the auto-close time for inactive tickets. Examples: 30m, 2h, 1d, off.
+
+,ticket_ping @role
+  Set a role to display inside new tickets (will not actually ping them).
+
+,autoresponder add <trigger> <response>
+  Add an autoresponder: when trigger is sent, bot replies with response.
+
+,autoresponder remove <trigger>
+  Remove an autoresponder trigger.
+
+,autoresponder list
+  List all autoresponders set up in this server.
+
+,autoresponder_filter_on
+  Enable the autoresponder profanity/content filter for this server.
+
+,autoresponder_filter_off
+  Disable the autoresponder filter for this server.
+
+═══════════════════════════════════════════════
+  PREFIX COMMANDS — FEATURES  (prefix: ,)
+═══════════════════════════════════════════════
+
+,afk [reason]
+  Set your AFK status via prefix command.
+  Prefix version of /afk.
+
+,boosterrole create <name>
+  Create a custom role for yourself (server boosters only).
+
+,boosterrole color <hex>
+  Set the color of your custom booster role. Example: ,boosterrole color #FF5733
+
+═══════════════════════════════════════════════
+  PREFIX COMMANDS — FUN  (prefix: ,)
+═══════════════════════════════════════════════
+
+,coinflip
+  Flip a coin. Aliases: ,coin ,flip
+
+,random [min] [max]
+  Generate a random number. Aliases: ,rng
+
+═══════════════════════════════════════════════
+  EMBED COLOR CUSTOMIZATION
+═══════════════════════════════════════════════
+
+,embed_<type>_#hex
+  Set the embed color for a specific embed type.
+  Examples:
+    ,embed_ticket_#57F287
+    ,embed_moderation_#ED4245
+    ,embed_general_#5865F2
+  

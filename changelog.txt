@@ -1,3 +1,7 @@
+[2026-04-26] docs: add commands.txt with every command listed
+- Full reference file covering all 63 commands (29 slash + 34 prefix)
+- Organized by category with usage, aliases, and permission requirements
+
 [2026-04-26] feat: update /features and /modhelp pages to match all commands
 - /features now shows 12 features (4 pages): added Dynamic Voice Channels, Reminders, Invite Tracking, Appeals System, AI Tools, Plugins System
 - /modhelp expanded from 4 to 5 pages: added ,softban, ,unraid, ,appeals_channel, ,audit
