@@ -4,21 +4,24 @@ import { safeRespond } from "../../utils/helpers.js";
 export const modHelpPages = [];
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (1/4)")
+        .setTitle("🔧 Moderator Help (1/5)")
         .setDescription(
             "🔧 Moderation\n\n" +
             "`,kick @user [reason]` – Kick a user.\n" +
             "`,ban @user [reason]` – Ban a user.\n" +
+            "`,softban @user [reason]` – Ban + unban (removes recent messages).\n" +
             "`,damage @user <time>` – Timeout a user (e.g. 10m, 1h).\n" +
-            "`,heal @user` – Remove a timeout.\n\n" +
-            "🧾 Cases\n\n" +
-            "`,case_channel #channel` – Set where moderation/ticket cases are posted.\n"
+            "`,heal @user` – Remove a timeout.\n" +
+            "`,unraid` – Lift a raid lockdown (admin only).\n\n" +
+            "🧾 Cases & Appeals\n\n" +
+            "`,case_channel #channel` – Set where moderation/ticket cases are posted.\n" +
+            "`,appeals_channel #channel` – Set where appeal cases are posted.\n"
         )
         .setColor(0xed4245)
 );
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (2/4)")
+        .setTitle("🔧 Moderator Help (2/5)")
         .setDescription(
             "🎫 Tickets\n\n" +
             "`,ticket_channel #channel` – Set ticket panel channel.\n" +
@@ -31,7 +34,7 @@ modHelpPages.push(
 );
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (3/4)")
+        .setTitle("🔧 Moderator Help (3/5)")
         .setDescription(
             "🤖 Autoresponders\n\n" +
             "`,autoresponder add <trigger> <response>`\n" +
@@ -45,7 +48,7 @@ modHelpPages.push(
 );
 modHelpPages.push(
     new EmbedBuilder()
-        .setTitle("🔧 Moderator Help (4/4)")
+        .setTitle("🔧 Moderator Help (4/5)")
         .setDescription(
             "🎭 Booster Role System\n\n" +
             "`,boosterrole create <name>`\n" +
@@ -64,10 +67,29 @@ modHelpPages.push(
             "`,slowmode [#channel] <seconds|off>`\n" +
             "`,clear <amount>`\n" +
             "`,nick @user <new nickname>`\n" +
-            "`,nicklock @user` / `,nickunlock @user`\n\n" +
+            "`,nicklock @user` / `,nickunlock @user`\n" +
+            "`,audit @user` – View audit log for a user (requires Audit Log plugin).\n\n" +
             "🎨 Embeds\n\n" +
             "`,embed_<type>_#hex` – Set per-type embed color.\n" +
             "Example: `,embed_ticket_#57F287`"
+        )
+        .setColor(0xed4245)
+);
+modHelpPages.push(
+    new EmbedBuilder()
+        .setTitle("🔧 Moderator Help (5/5)")
+        .setDescription(
+            "🔌 Plugins\n\n" +
+            "`/plugins` – Enable or disable optional bot features per server.\n\n" +
+            "⚙️ Server Setup\n\n" +
+            "`/server_setup` – Run initial server setup (roles, channels, categories).\n" +
+            "`/redo_server_setup` – Redo the server setup process.\n\n" +
+            "🗑️ Bulk Delete\n\n" +
+            "`/nuke` – Delete messages from a channel (up to 100 at a time).\n\n" +
+            "📊 Info & Invites\n\n" +
+            "`/serverinfo` – View server information.\n" +
+            "`/userinfo [@user]` – View user information.\n" +
+            "`/invites [@user]` – View invite stats and leaderboard.\n"
         )
         .setColor(0xed4245)
 );

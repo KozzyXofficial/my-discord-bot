@@ -1,3 +1,8 @@
+[2026-04-26] feat: update /features and /modhelp pages to match all commands
+- /features now shows 12 features (4 pages): added Dynamic Voice Channels, Reminders, Invite Tracking, Appeals System, AI Tools, Plugins System
+- /modhelp expanded from 4 to 5 pages: added ,softban, ,unraid, ,appeals_channel, ,audit
+- New modhelp page 5 covers /plugins, /server_setup, /redo_server_setup, /nuke, /serverinfo, /userinfo, /invites
+
 [2026-04-23] fix: repair help/modhelp/features pagination buttons and restore 7 pages
 - Fixed "Interaction Failed" on prev/next buttons — interactionCreate was not handling help pagination
 - Added button handlers for help_prev/next, modhelp_prev/next, features_prev/next

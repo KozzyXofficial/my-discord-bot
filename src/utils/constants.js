@@ -37,6 +37,12 @@ export const featureList = [
     { name: "🧾 Case System", value: "• One unified feed for moderation + tickets\n• `,case_channel #channel`\n• Embeds only" },
     { name: "💎 Booster Custom Role System", value: "• `,boosterrole create <name>`\n• `,boosterrole color <hex>`" },
     { name: "⚠️ Warnings + Thresholds", value: "• `,warn` + history\n• Auto actions via thresholds" },
+    { name: "🔊 Dynamic Voice Channels", value: "• `/vc` to manage your VC\n• Create, rename, lock, limit\n• Auto-cleanup when empty" },
+    { name: "⏰ Reminders", value: "• `/remind` to set a reminder\n• DMs you when time is up\n• Supports minutes, hours, days" },
+    { name: "📨 Invite Tracking", value: "• `/invites` to check invite stats\n• Tracks who invited whom\n• Per-guild leaderboard" },
+    { name: "📋 Appeals System", value: "• `/appeal` to submit a ban appeal\n• `,appeals_channel` to set case feed\n• Cases posted as embeds" },
+    { name: "✨ AI Tools", value: "• `/ask` – Chat with Claude AI\n• `/imagine` – Generate images\n• `/translate`, `/summarize`, `/decide`\n• `/generate_rules` for server rules" },
+    { name: "🔌 Plugins System", value: "• `/plugins` to toggle optional features\n• Enable audit log, extra tools, and more\n• Per-server configuration" },
 ];
 
 export const roastLines = [
