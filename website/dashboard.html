@@ -1267,7 +1267,8 @@
 
         .page.active>* {
             /* animation: slideInUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) backwards; Disabled to prevent black screen on wide monitors */
-            opacity: 1; /* Ensure visible without animation */
+            opacity: 1;
+            /* Ensure visible without animation */
         }
 
         .page.active>*:nth-child(1) {
@@ -3028,7 +3029,8 @@
                         </div>
                         <div class="terminal-input-wrap">
                             <span class="terminal-prompt">&gt;</span>
-                            <input type="text" id="terminal-input" placeholder="Type a command (e.g. ,warn @user)..." autocomplete="off" onkeydown="handleTerminalInput(event)">
+                            <input type="text" id="terminal-input" placeholder="Type a command (e.g. ,warn @user)..."
+                                autocomplete="off" onkeydown="handleTerminalInput(event)">
                         </div>
                     </div>
                 </section>
@@ -4218,7 +4220,7 @@
                 console.log('[Auth] Fetching login URL...');
                 const data = await apiFetch('/api/auth/login');
                 if (!data.url) throw new Error('No redirect URL received from API');
-                
+
                 console.log('[Auth] Redirecting to Discord:', data.url);
                 window.location.href = data.url;
             } catch (err) {
