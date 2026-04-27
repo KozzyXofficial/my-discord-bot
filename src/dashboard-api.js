@@ -305,11 +305,68 @@ export function initAPI(client) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: true }));
         }
-        else if (pathname.startsWith('/api/triggers') && (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE')) {
+        else if (pathname.startsWith('/api/triggers') && (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE' || req.method === 'PATCH')) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: true }));
         }
         else if (pathname === '/api/config' && req.method === 'POST') {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true }));
+        }
+        else if (pathname.startsWith('/api/channels/') && (req.method === 'PATCH' || req.method === 'PUT')) {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                try {
+                    const channelId = pathname.split('/').pop();
+                    const vals = JSON.parse(body || '{}');
+                    const channel = await client.channels.fetch(channelId);
+                    if (!channel) {
+                        res.writeHead(404, { 'Content-Type': 'application/json' });
+                        return res.end(JSON.stringify({ error: 'Channel not found' }));
+                    }
+                    const edits = {};
+                    if (vals.name !== undefined) edits.name = vals.name;
+                    if (vals.topic !== undefined) edits.topic = vals.topic;
+                    if (vals.nsfw !== undefined) edits.nsfw = !!vals.nsfw;
+                    if (vals.rateLimit !== undefined) edits.rateLimitPerUser = Number(vals.rateLimit) || 0;
+                    await channel.edit(edits);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                } catch (err) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: err.message }));
+                }
+            });
+        }
+        else if (pathname.startsWith('/api/roles/') && (req.method === 'PATCH' || req.method === 'PUT')) {
+            let body = '';
+            req.on('data', chunk => body += chunk);
+            req.on('end', async () => {
+                try {
+                    const roleId = pathname.split('/').pop();
+                    const vals = JSON.parse(body || '{}');
+                    const guild = client.guilds.cache.get(process.env.GUILD_ID);
+                    const role = guild?.roles.cache.get(roleId);
+                    if (!role) {
+                        res.writeHead(404, { 'Content-Type': 'application/json' });
+                        return res.end(JSON.stringify({ error: 'Role not found' }));
+                    }
+                    const edits = {};
+                    if (vals.name !== undefined) edits.name = vals.name;
+                    if (vals.color !== undefined) edits.color = vals.color;
+                    if (vals.hoist !== undefined) edits.hoist = !!vals.hoist;
+                    if (vals.mentionable !== undefined) edits.mentionable = !!vals.mentionable;
+                    await role.edit(edits);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                } catch (err) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: err.message }));
+                }
+            });
+        }
+        else if (pathname.startsWith('/api/commands/') && (req.method === 'PATCH' || req.method === 'PUT')) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: true }));
         }
