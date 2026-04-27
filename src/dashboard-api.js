@@ -239,8 +239,8 @@ export function initAPI(client) {
                     : guild.channels.cache.find(c => c.type === 0);
                 if (!channel) return json(res, 404, { error: 'No text channel available' });
 
-                const ownerId = process.env.OWNER_ID || sessionUser?.id;
-                const member = await guild.members.fetch(ownerId).catch(() => null);
+                const executorId = sessionUser?.id || process.env.OWNER_ID;
+                const member = await guild.members.fetch(executorId).catch(() => null);
                 if (!member) return json(res, 500, { error: 'Could not resolve executing member' });
 
                 // Parse mentions from args
