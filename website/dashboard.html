@@ -4214,27 +4214,36 @@
 
         // --- AUTH LOGIC ---
         async function startLogin() {
-            const res = await fetch(`${API.base}/api/auth/login`);
-            const { url } = await res.json();
-            window.location.href = url;
+            try {
+                console.log('[Auth] Fetching login URL...');
+                const data = await apiFetch('/api/auth/login');
+                if (!data.url) throw new Error('No redirect URL received from API');
+                
+                console.log('[Auth] Redirecting to Discord:', data.url);
+                window.location.href = data.url;
+            } catch (err) {
+                console.error('[Auth] Login failed:', err);
+                toast('Login failed: ' + err.message, 'error');
+            }
         }
 
         async function handleCallback(code) {
             try {
-                const res = await fetch(`${API.base}/api/auth/callback`, {
+                console.log('[Auth] Exchanging code for token...');
+                const data = await apiFetch('/api/auth/callback', {
                     method: 'POST',
-                    body: JSON.stringify({ code }),
-                    headers: { 'Content-Type': 'application/json' }
+                    body: JSON.stringify({ code })
                 });
-                const data = await res.json();
                 if (data.token) {
                     localStorage.setItem('kozzyx_session', data.token);
                     localStorage.setItem('kozzyx_user', JSON.stringify(data.user));
+                    console.log('[Auth] Login successful!');
                     window.location.href = window.location.pathname; // Clean URL
                 } else {
-                    alert(data.error || 'Login failed');
+                    throw new Error(data.error || 'Login failed');
                 }
             } catch (err) {
+                console.error('[Auth] Callback error:', err);
                 alert('Auth failed: ' + err.message);
             }
         }
